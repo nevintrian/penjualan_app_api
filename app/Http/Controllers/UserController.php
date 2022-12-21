@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
-use App\Models\Product;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\User;
 use Illuminate\Http\Response;
 
-class ProductController extends Controller
+class UserController extends Controller
 {
 
     /**
@@ -19,23 +19,23 @@ class ProductController extends Controller
     {
         return response()->json([
             'status' => true,
-            'data' => Product::all()
+            'data' => User::all()
         ], Response::HTTP_OK);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreProductRequest  $request
+     * @param  \App\Http\Requests\StoreUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreUserRequest $request)
     {
-        Product::create($request->all());
+        User::create($request->all());
 
         return response()->json([
             'status' => true,
-            'message' => 'Berhasil tambah data produk',
+            'message' => 'Berhasil tambah data user',
             'data' => $request->all()
         ], Response::HTTP_CREATED);
     }
@@ -43,17 +43,17 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateProductRequest  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Http\Requests\UpdateUserRequest  $request
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        Product::find($product->id)->update($request->all());
+        User::find($user->id)->update($request->all());
 
         return response()->json([
             'status' => true,
-            'message' => 'Berhasil ubah data produk',
+            'message' => 'Berhasil ubah data user',
             'data' => $request->all()
         ], Response::HTTP_OK);
     }
@@ -61,16 +61,16 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(User $user)
     {
-        Product::find($product->id)->delete();
+        User::find($user->id)->delete();
 
         return response()->json([
             'status' => true,
-            'message' => 'Berhasil hapus data produk',
+            'message' => 'Berhasil hapus data user',
         ], Response::HTTP_OK);
     }
 }

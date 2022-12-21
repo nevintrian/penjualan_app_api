@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
-use App\Models\Product;
+use App\Http\Requests\StoreTransactionRequest;
+use App\Http\Requests\UpdateTransactionRequest;
+use App\Models\Transaction;
 use Illuminate\Http\Response;
 
-class ProductController extends Controller
+class TransactionController extends Controller
 {
 
     /**
@@ -19,41 +19,42 @@ class ProductController extends Controller
     {
         return response()->json([
             'status' => true,
-            'data' => Product::all()
+            'data' => Transaction::all()
         ], Response::HTTP_OK);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreProductRequest  $request
+     * @param  \App\Http\Requests\StoreTransactionRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductRequest $request)
+    public function store(StoreTransactionRequest $request)
     {
-        Product::create($request->all());
+        Transaction::create($request->all());
 
         return response()->json([
             'status' => true,
-            'message' => 'Berhasil tambah data produk',
+            'message' => 'Berhasil tambah data transaksi',
             'data' => $request->all()
         ], Response::HTTP_CREATED);
     }
 
+
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateProductRequest  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Http\Requests\UpdateTransactionRequest  $request
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateTransactionRequest $request, Transaction $transaction)
     {
-        Product::find($product->id)->update($request->all());
+        Transaction::find($transaction->id)->update($request->all());
 
         return response()->json([
             'status' => true,
-            'message' => 'Berhasil ubah data produk',
+            'message' => 'Berhasil ubah data transaksi',
             'data' => $request->all()
         ], Response::HTTP_OK);
     }
@@ -61,16 +62,16 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Transaction $transaction)
     {
-        Product::find($product->id)->delete();
+        Transaction::find($transaction->id)->delete();
 
         return response()->json([
             'status' => true,
-            'message' => 'Berhasil hapus data produk',
+            'message' => 'Berhasil hapus data transaksi',
         ], Response::HTTP_OK);
     }
 }
