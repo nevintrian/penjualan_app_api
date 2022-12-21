@@ -24,10 +24,7 @@ class UpdateTransactionDetailRequest extends FormRequest
     public function rules()
     {
         return [
-            'transaction_id' => 'integer|min:1|required',
-            'product_id' => 'integer|min:1|required',
-            'quantity' => 'integer|min:1|required',
-            'subtotal' => 'integer|min:1|required',
+          //
         ];
     }
 }

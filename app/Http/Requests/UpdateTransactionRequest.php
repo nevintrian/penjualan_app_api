@@ -24,10 +24,7 @@ class UpdateTransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'integer|min:1|required',
-            'total_price' => 'integer|min:1|required',
-            'image' => 'string|min:1|required',
-            'status' => 'integer|min:1|required',
+            'status' => 'integer|required',
         ];
     }
 }
