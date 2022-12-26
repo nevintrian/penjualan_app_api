@@ -29,5 +29,12 @@ class TransactionDetailSeeder extends Seeder
             'quantity' => 1,
             'subtotal' => 10000
         ]);
+
+        TransactionDetail::create([
+            'transaction_id' => 2,
+            'product_id' => 1,
+            'quantity' => 1,
+            'subtotal' => 10000
+        ]);
     }
 }

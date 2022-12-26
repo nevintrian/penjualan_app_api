@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,11 +18,19 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $data = User::all();
+        if ($request->role == 'admin') {
+            $data = User::where('role', 'admin')->get();
+        }
+
+        if ($request->role == 'customer') {
+            $data = User::where('role', 'customer')->get();
+        }
         return response()->json([
             'status' => true,
-            'data' => User::all()
+            'data' => $data
         ], Response::HTTP_OK);
     }
 
@@ -72,5 +83,29 @@ class UserController extends Controller
             'status' => true,
             'message' => 'Berhasil hapus data user',
         ], Response::HTTP_OK);
+    }
+
+    /**
+     * Change password for user.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        $user = User::find($request->user_id);
+        $hashedPassword = $user->password;
+        if (Hash::check($request->old_password, $hashedPassword)) {
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil ubah password',
+            ], Response::HTTP_OK);
+        }
+        return response()->json([
+            'status' => false,
+            'message' => 'Password yang dimasukkan salah',
+        ], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

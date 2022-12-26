@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->integer('total_price');
-            $table->string('image');
+            $table->string('image')->default('storage/image/default.png');
             $table->string('status');
             $table->timestamps();
 

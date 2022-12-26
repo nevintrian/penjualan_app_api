@@ -31,12 +31,20 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        Product::create($request->all());
+        $image_path = $request->file('image')->store('image', 'public');
+
+        $data = Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'image' => "storage/" . $image_path
+        ]);
 
         return response()->json([
             'status' => true,
             'message' => 'Berhasil tambah data produk',
-            'data' => $request->all()
+            'data' => $data
         ], Response::HTTP_CREATED);
     }
 
@@ -49,12 +57,21 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        Product::find($product->id)->update($request->all());
+
+        $image_path = $request->file('image')->store('image', 'public');
+
+        $data = Product::find($product->id)->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'image' => "storage/" . $image_path
+        ]);
 
         return response()->json([
             'status' => true,
             'message' => 'Berhasil ubah data produk',
-            'data' => $request->all()
+            'data' => $product
         ], Response::HTTP_OK);
     }
 

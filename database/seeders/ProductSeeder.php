@@ -16,15 +16,15 @@ class ProductSeeder extends Seeder
     public function run()
     {
         Product::create([
-            'name' => 'Lampu',
-            'description' => 'Ini adalah lampu untuk rumah',
+            'name' => 'Nasi Goreng',
+            'description' => 'Ini adalah nasi goreng',
             'price' => 10000,
             'stock' => 12
         ]);
 
         Product::create([
-            'name' => 'Stopkontak',
-            'description' => 'Ini adalah stopkontak untuk rumah',
+            'name' => 'Teh',
+            'description' => 'Ini adalah teh',
             'price' => 5000,
             'stock' => 19
         ]);

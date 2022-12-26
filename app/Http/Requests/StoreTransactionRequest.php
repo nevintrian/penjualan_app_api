@@ -24,10 +24,10 @@ class StoreTransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'integer|min:1|required',
-            'total_price' => 'integer|min:1|required',
-            'image' => 'string|min:1|required',
+            'user_id' => 'integer|min:1|required|exists:users,id',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'status' => 'integer|required',
+            'items' => 'required'
         ];
     }
 }

@@ -25,6 +25,9 @@ class UpdateTransactionRequest extends FormRequest
     {
         return [
             'status' => 'integer|required',
+            'user_id' => 'prohibited',
+            'image' => 'prohibited',
+            'items' => 'prohibited'
         ];
     }
 }
